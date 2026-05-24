@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "lib": [
+            "es2015",
+            "dom"
+        ],
+        "experimentalDecorators": true,
+        "skipLibCheck": true,
+        "strict": false,
+        "noImplicitAny": false,
+        "ignoreDeprecations": "6.0",
+        "rootDir": "."
+    },
+    "include": [
+        "creator.d.ts",
+        "assets/**/*.ts"
+    ],
+    "exclude": [
+        "library",
+        "local",
+        "temp",
+        "build",
+        "node_modules"
+    ]
+}
