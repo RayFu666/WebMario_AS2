@@ -1,0 +1,101 @@
+const { ccclass, property } = cc._decorator;
+
+@ccclass
+export default class PlayerController extends cc.Component {
+    @property
+    moveSpeed: number = 260;
+
+    @property
+    airMoveSpeed: number = 180;
+
+    @property
+    jumpSpeed: number = 520;
+
+    private rigidBody: cc.RigidBody = null;
+    private moveDir: number = 0;
+
+    onLoad(): void {
+        this.rigidBody = this.getComponent(cc.RigidBody);
+
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    }
+
+    onDestroy(): void {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    }
+
+    update(): void {
+        if (!this.rigidBody) {
+            return;
+        }
+
+        const velocity = this.rigidBody.linearVelocity;
+        const onGround = this.isOnGround();
+
+        if (onGround) {
+            velocity.x = this.moveDir * this.moveSpeed;
+        } else {
+            if (this.moveDir !== 0) {
+                velocity.x = this.moveDir * this.airMoveSpeed;
+            }
+        }
+
+        this.rigidBody.linearVelocity = velocity;
+
+        if (this.moveDir < 0) {
+            this.node.scaleX = -1;
+        } else if (this.moveDir > 0) {
+            this.node.scaleX = 1;
+        }
+    }
+
+    private onKeyDown(event: cc.Event.EventKeyboard): void {
+        if (event.keyCode === cc.macro.KEY.left || event.keyCode === cc.macro.KEY.a) {
+            this.moveDir = -1;
+        }
+
+        if (event.keyCode === cc.macro.KEY.right || event.keyCode === cc.macro.KEY.d) {
+            this.moveDir = 1;
+        }
+
+        if (event.keyCode === cc.macro.KEY.space) {
+            this.jump();
+        }
+    }
+
+    private onKeyUp(event: cc.Event.EventKeyboard): void {
+        if (
+            event.keyCode === cc.macro.KEY.left ||
+            event.keyCode === cc.macro.KEY.a ||
+            event.keyCode === cc.macro.KEY.right ||
+            event.keyCode === cc.macro.KEY.d
+        ) {
+            this.moveDir = 0;
+        }
+    }
+
+    private jump(): void {
+        if (!this.rigidBody) {
+            return;
+        }
+
+        if (!this.isOnGround()) {
+            return;
+        }
+
+        const velocity = this.rigidBody.linearVelocity;
+        velocity.y = this.jumpSpeed;
+        this.rigidBody.linearVelocity = velocity;
+    }
+
+    private isOnGround(): boolean {
+        if (!this.rigidBody) {
+            return false;
+        }
+
+        const velocity = this.rigidBody.linearVelocity;
+        return Math.abs(velocity.y) <= 5;
+    }
+}
