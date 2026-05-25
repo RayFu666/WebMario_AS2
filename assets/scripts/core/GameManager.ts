@@ -5,6 +5,9 @@ export default class GameManager extends cc.Component {
     @property(cc.Node)
     player: cc.Node = null;
 
+    @property(cc.Label)
+    lifeLabel: cc.Label = null;
+
     @property
     maxLife: number = 3;
 
@@ -20,6 +23,8 @@ export default class GameManager extends cc.Component {
         if (this.player) {
             this.playerStartPos = cc.v2(this.player.x, this.player.y);
         }
+
+        this.updateLifeUI();
     }
 
     update(): void {
@@ -41,6 +46,7 @@ export default class GameManager extends cc.Component {
         }
 
         this.respawnPlayer();
+        this.updateLifeUI();
     }
 
     private respawnPlayer(): void {
@@ -54,6 +60,12 @@ export default class GameManager extends cc.Component {
         if (rigidBody) {
             rigidBody.linearVelocity = cc.v2(0, 0);
             rigidBody.angularVelocity = 0;
+        }
+    }
+
+    private updateLifeUI(): void {
+        if (this.lifeLabel) {
+            this.lifeLabel.string = 'x ' + this.currentLife;
         }
     }
 }
