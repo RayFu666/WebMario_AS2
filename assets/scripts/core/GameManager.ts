@@ -14,6 +14,9 @@ export default class GameManager extends cc.Component {
     @property(cc.Label)
     timerLabel: cc.Label = null;
 
+    @property(cc.Label)
+    coinLabel: cc.Label = null;
+
     @property
     maxLife: number = 3;
 
@@ -25,36 +28,34 @@ export default class GameManager extends cc.Component {
 
     private currentLife: number = 3;
     private score: number = 0;
+    private coin: number = 0;
     private timeLeft: number = 120;
     private timerAcc: number = 0;
     private playerStartPos: cc.Vec2 = cc.v2(0, 0);
+    private isGameOver: boolean = false;
 
     start(): void {
         this.currentLife = this.maxLife;
         this.score = 0;
+        this.coin = 0;
         this.timeLeft = this.startTime;
         this.timerAcc = 0;
+        this.isGameOver = false;
 
         if (this.player) {
             this.playerStartPos = cc.v2(this.player.x, this.player.y);
         }
 
-        this.updateLifeUI();
-        this.updateScoreUI();
-        this.updateTimerUI();
+        this.updateAllUI();
     }
 
     update(dt: number): void {
-        if (!this.player) {
-            return;
-        }
-
-        if (this.player.y < this.fallLimitY) {
-            this.playerDie();
+        if (this.isGameOver) {
             return;
         }
 
         this.updateTimer(dt);
+        this.checkPlayerFall();
     }
 
     public addScore(value: number): void {
@@ -62,16 +63,35 @@ export default class GameManager extends cc.Component {
         this.updateScoreUI();
     }
 
+    public addCoin(value: number): void {
+        this.coin += value;
+        this.updateCoinUI();
+    }
+
     public playerDie(): void {
+        if (this.isGameOver) {
+            return;
+        }
+
         this.currentLife--;
 
         if (this.currentLife <= 0) {
-            cc.director.loadScene('GameOver');
+            this.goToGameOver();
             return;
         }
 
         this.respawnPlayer();
         this.updateLifeUI();
+    }
+
+    private checkPlayerFall(): void {
+        if (!this.player) {
+            return;
+        }
+
+        if (this.player.y < this.fallLimitY) {
+            this.playerDie();
+        }
     }
 
     private respawnPlayer(): void {
@@ -91,36 +111,65 @@ export default class GameManager extends cc.Component {
     private updateTimer(dt: number): void {
         this.timerAcc += dt;
 
-        if (this.timerAcc < 1) {
-            return;
+        while (this.timerAcc >= 1) {
+            this.timerAcc -= 1;
+
+            this.timeLeft--;
+
+            if (this.timeLeft <= 0) {
+                this.timeLeft = 0;
+                this.updateTimerUI();
+                this.goToGameOver();
+                return;
+            }
+
+            this.updateTimerUI();
         }
+    }
 
-        this.timerAcc = 0;
-        this.timeLeft--;
+    private goToGameOver(): void {
+        this.isGameOver = true;
+        cc.director.loadScene('GameOver');
+    }
 
-        if (this.timeLeft <= 0) {
-            cc.director.loadScene('GameOver');
-            return;
-        }
-
+    private updateAllUI(): void {
+        this.updateLifeUI();
+        this.updateScoreUI();
         this.updateTimerUI();
+        this.updateCoinUI();
     }
 
     private updateLifeUI(): void {
         if (this.lifeLabel) {
-            this.lifeLabel.string = 'x ' + this.currentLife;
+            this.lifeLabel.string = '' + this.currentLife;
         }
     }
 
     private updateScoreUI(): void {
         if (this.scoreLabel) {
-            this.scoreLabel.string = 'Score: ' + this.score;
+            this.scoreLabel.string = this.padScore(this.score);
         }
     }
 
     private updateTimerUI(): void {
         if (this.timerLabel) {
-            this.timerLabel.string = 'Time: ' + this.timeLeft;
+            this.timerLabel.string = '' + this.timeLeft;
         }
+    }
+
+    private updateCoinUI(): void {
+        if (this.coinLabel) {
+            this.coinLabel.string = '' + this.coin;
+        }
+    }
+
+    private padScore(value: number): string {
+        let text = '' + value;
+
+        while (text.length < 7) {
+            text = '0' + text;
+        }
+
+        return text;
     }
 }
