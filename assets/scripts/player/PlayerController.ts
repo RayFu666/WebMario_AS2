@@ -6,13 +6,17 @@ export default class PlayerController extends cc.Component {
     moveSpeed: number = 260;
 
     @property
-    airMoveSpeed: number = 180;
+    airMoveSpeed: number = 160;
 
     @property
-    jumpSpeed: number = 520;
+    jumpSpeed: number = 430;
+
+    @property(cc.SpriteFrame)
+    bigMarioFrame: cc.SpriteFrame = null;
 
     private rigidBody: cc.RigidBody = null;
     private moveDir: number = 0;
+    private isBig: boolean = false;
 
     onLoad(): void {
         this.rigidBody = this.getComponent(cc.RigidBody);
@@ -48,6 +52,32 @@ export default class PlayerController extends cc.Component {
             this.node.scaleX = -1;
         } else if (this.moveDir > 0) {
             this.node.scaleX = 1;
+        }
+    }
+
+    public becomeBig(): void {
+        if (this.isBig) {
+            return;
+        }
+
+        this.isBig = true;
+
+        const oldBottom = this.node.y - this.node.height / 2;
+
+        const sprite = this.getComponent(cc.Sprite);
+        if (sprite && this.bigMarioFrame) {
+            sprite.spriteFrame = this.bigMarioFrame;
+        }
+
+        this.node.setContentSize(64, 116);
+
+        this.node.y = oldBottom + this.node.height / 2;
+
+        const collider = this.getComponent(cc.PhysicsBoxCollider);
+        if (collider) {
+            collider.size = cc.size(44, 108);
+            collider.offset = cc.v2(0, 0);
+            collider.apply();
         }
     }
 
