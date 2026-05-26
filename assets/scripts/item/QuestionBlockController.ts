@@ -98,6 +98,12 @@ export default class QuestionBlockController extends cc.Component {
             this.sprite.spriteFrame = this.usedFrame;
         }
 
+        if (this.gameManagerNode) {
+            const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
+            if (gameManager && gameManager.playPowerUpAppearSound) {
+                gameManager.playPowerUpAppearSound();
+            }
+        }
         this.spawnMushroom();
 
         if (this.gameManagerNode) {

@@ -17,6 +17,9 @@ export default class GameManager extends cc.Component {
     @property(cc.Label)
     coinLabel: cc.Label = null;
 
+    @property(cc.Node)
+    audioManagerNode: cc.Node = null;
+
     @property
     maxLife: number = 3;
 
@@ -73,6 +76,8 @@ export default class GameManager extends cc.Component {
             return;
         }
 
+        this.playDieSound();
+
         this.currentLife--;
 
         if (this.currentLife <= 0) {
@@ -124,6 +129,50 @@ export default class GameManager extends cc.Component {
             }
 
             this.updateTimerUI();
+        }
+    }
+
+    private playDieSound(): void {
+        if (this.audioManagerNode) {
+            const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
+            if (audioManager) {
+                audioManager.playLoseOneLife();
+            }
+        }
+    }
+    public playPowerUpSound(): void {
+        if (this.audioManagerNode) {
+            const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
+            if (audioManager) {
+                audioManager.playPowerUp();
+            }
+        }
+    }
+
+    public playPowerDownSound(): void {
+        if (this.audioManagerNode) {
+            const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
+            if (audioManager) {
+                audioManager.playPowerDown();
+            }
+        }
+    }
+
+    public playPowerUpAppearSound(): void {
+        if (this.audioManagerNode) {
+            const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
+            if (audioManager) {
+                audioManager.playPowerUpAppear();
+            }
+        }
+    }
+
+    public playKickSound(): void {
+        if (this.audioManagerNode) {
+            const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
+            if (audioManager) {
+                audioManager.playKick();
+            }
         }
     }
 

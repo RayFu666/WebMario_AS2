@@ -170,6 +170,10 @@ export default class EnemyController extends cc.Component {
             const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
             if (gameManager) {
                 gameManager.addScore(100);
+
+                if (gameManager.playKickSound) {
+                    gameManager.playKickSound();
+                }
             }
         }
 

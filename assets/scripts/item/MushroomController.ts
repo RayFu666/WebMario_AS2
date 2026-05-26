@@ -114,6 +114,12 @@ export default class MushroomController extends cc.Component {
         if (playerController) {
             playerController.becomeBig();
         }
+        if (this.gameManagerNode) {
+            const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
+            if (gameManager && gameManager.playPowerUpSound) {
+                gameManager.playPowerUpSound();
+            }
+        }
 
         if (this.gameManagerNode) {
             const gameManager = this.gameManagerNode.getComponent('GameManager') as any;

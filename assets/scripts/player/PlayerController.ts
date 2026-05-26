@@ -14,6 +14,9 @@ export default class PlayerController extends cc.Component {
     @property(cc.SpriteFrame)
     bigMarioFrame: cc.SpriteFrame = null;
 
+    @property(cc.Node)
+    audioManagerNode: cc.Node = null;
+
     private rigidBody: cc.RigidBody = null;
     private moveDir: number = 0;
     private isBig: boolean = false;
@@ -118,6 +121,13 @@ export default class PlayerController extends cc.Component {
         const velocity = this.rigidBody.linearVelocity;
         velocity.y = this.jumpSpeed;
         this.rigidBody.linearVelocity = velocity;
+
+        if (this.audioManagerNode) {
+            const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
+            if (audioManager) {
+                audioManager.playJump();
+            }
+        }
     }
 
     private isOnGround(): boolean {

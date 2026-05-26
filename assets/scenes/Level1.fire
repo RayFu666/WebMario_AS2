@@ -79,18 +79,21 @@
       },
       {
         "__id__": 29
+      },
+      {
+        "__id__": 49
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 65
-      },
-      {
-        "__id__": 66
-      },
-      {
         "__id__": 67
+      },
+      {
+        "__id__": 68
+      },
+      {
+        "__id__": 69
       }
     ],
     "_prefab": null,
@@ -270,16 +273,16 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 61
-      },
-      {
-        "__id__": 62
-      },
-      {
         "__id__": 63
       },
       {
         "__id__": 64
+      },
+      {
+        "__id__": 65
+      },
+      {
+        "__id__": 66
       }
     ],
     "_prefab": null,
@@ -513,13 +516,13 @@
         "__id__": 21
       },
       {
-        "__id__": 50
+        "__id__": 52
       },
       {
-        "__id__": 53
+        "__id__": 55
       },
       {
-        "__id__": 56
+        "__id__": 58
       }
     ],
     "_active": true,
@@ -977,7 +980,7 @@
         "__id__": 24
       },
       {
-        "__id__": 49
+        "__id__": 51
       }
     ],
     "_prefab": null,
@@ -1199,6 +1202,9 @@
     },
     "coinLabel": {
       "__id__": 41
+    },
+    "audioManagerNode": {
+      "__id__": 49
     },
     "maxLife": 3,
     "fallLimitY": -450,
@@ -2275,6 +2281,110 @@
     "_id": "e1lRlA5aVEDYA2kxsIKfay"
   },
   {
+    "__type__": "cc.Node",
+    "_name": "AudioManager",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 50
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "99+B99UgNOBadOCVGTKCUq"
+  },
+  {
+    "__type__": "75856O4y8dKxYjE4L9fPRRx",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 49
+    },
+    "_enabled": true,
+    "bgm": {
+      "__uuid__": "059e1a4d-397d-43b0-ad07-1336afc4cebb"
+    },
+    "jumpSound": {
+      "__uuid__": "4fff580b-5215-419c-9989-ac2394f62916"
+    },
+    "loseOneLifeSound": {
+      "__uuid__": "ac05c53c-e517-42ec-8d54-6f1e88128760"
+    },
+    "gameOverSound": {
+      "__uuid__": "ef3cf951-2cc0-4c29-ad0f-bddab32b652d"
+    },
+    "levelClearSound": {
+      "__uuid__": "f722f2d9-bc65-4e05-9ed0-f1a5960aca32"
+    },
+    "powerUpSound": {
+      "__uuid__": "52cac6a4-ac8f-4a95-8a70-28d63a40b4ac"
+    },
+    "powerDownSound": {
+      "__uuid__": "ace0a5b8-8963-46f2-bdc1-2db57376a798"
+    },
+    "powerUpAppearSound": {
+      "__uuid__": "b298bcd6-2582-412e-94a8-2a945a0e95b4"
+    },
+    "kickSound": {
+      "__uuid__": "c1897cb3-dd6d-438b-aa73-8fd6913f9357"
+    },
+    "stompSound": {
+      "__uuid__": "34c727bb-1f6a-4d92-891c-71119a7a063c"
+    },
+    "bgmVolume": 0.5,
+    "effectVolume": 1,
+    "_id": "6cJEHRaUNJepIEcjVix9I9"
+  },
+  {
     "__type__": "cc.PhysicsBoxCollider",
     "_name": "",
     "_objFlags": 0,
@@ -2291,7 +2401,7 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -12
+      "y": -8
     },
     "_size": {
       "__type__": "cc.Size",
@@ -2311,10 +2421,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 51
+        "__id__": 53
       },
       {
-        "__id__": 52
+        "__id__": 54
       }
     ],
     "_prefab": null,
@@ -2370,7 +2480,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 50
+      "__id__": 52
     },
     "_enabled": true,
     "_type": 0,
@@ -2395,7 +2505,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 50
+      "__id__": 52
     },
     "_enabled": true,
     "tag": 0,
@@ -2427,10 +2537,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 54
+        "__id__": 56
       },
       {
-        "__id__": 55
+        "__id__": 57
       }
     ],
     "_prefab": null,
@@ -2486,7 +2596,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 53
+      "__id__": 55
     },
     "_enabled": true,
     "_type": 0,
@@ -2511,7 +2621,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 53
+      "__id__": 55
     },
     "_enabled": true,
     "tag": 0,
@@ -2543,16 +2653,16 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 57
-      },
-      {
-        "__id__": 58
-      },
-      {
         "__id__": 59
       },
       {
         "__id__": 60
+      },
+      {
+        "__id__": 61
+      },
+      {
+        "__id__": 62
       }
     ],
     "_prefab": null,
@@ -2608,7 +2718,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 56
+      "__id__": 58
     },
     "_enabled": true,
     "_materials": [
@@ -2642,7 +2752,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 56
+      "__id__": 58
     },
     "_enabled": true,
     "_type": 0,
@@ -2667,7 +2777,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 56
+      "__id__": 58
     },
     "_enabled": true,
     "tag": 0,
@@ -2693,7 +2803,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 56
+      "__id__": 58
     },
     "_enabled": true,
     "playerNode": {
@@ -2824,6 +2934,9 @@
     "jumpSpeed": 500,
     "bigMarioFrame": {
       "__uuid__": "a2fa6d49-0e26-4350-ab07-ddd2770fa11e"
+    },
+    "audioManagerNode": {
+      "__id__": 49
     },
     "_id": "25x6J/rWtHO65q7+t9y3vX"
   },
