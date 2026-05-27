@@ -140,8 +140,9 @@ export default class GameManager extends cc.Component {
         }
 
         const playerController = this.player.getComponent('PlayerController') as any;
-        if (playerController) {
-            playerController.enabled = false;
+        if (playerController && playerController.startDeathAnimation) {
+            playerController.startDeathAnimation();
+            return;
         }
 
         this.freezePhysicsBody(this.player);

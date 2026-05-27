@@ -2852,7 +2852,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f7df941f-acde-4c29-b5a4-650fb20cf4e8"
+      "__uuid__": "af9fda52-8eeb-4a80-b4af-8c7f9631d1d2"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -2932,15 +2932,69 @@
     "moveSpeed": 260,
     "airMoveSpeed": 160,
     "jumpSpeed": 500,
-    "bigMarioFrame": {
-      "__uuid__": "a2fa6d49-0e26-4350-ab07-ddd2770fa11e"
+    "audioManagerNode": {
+      "__id__": 49
     },
     "smallMarioFrame": {
       "__uuid__": "f7df941f-acde-4c29-b5a4-650fb20cf4e8"
     },
-    "audioManagerNode": {
-      "__id__": 49
+    "bigMarioFrame": {
+      "__uuid__": "a2fa6d49-0e26-4350-ab07-ddd2770fa11e"
     },
+    "smallIdleFrame": {
+      "__uuid__": "af9fda52-8eeb-4a80-b4af-8c7f9631d1d2"
+    },
+    "smallWalkFrames": [
+      {
+        "__uuid__": "7e5a28f7-6df9-42ea-b5f2-d07f3222f7e0"
+      },
+      {
+        "__uuid__": "408a0293-ab7c-479c-a6fd-ac8d849cd864"
+      },
+      {
+        "__uuid__": "eb54e353-0b8e-4526-924e-e798826bcc33"
+      },
+      {
+        "__uuid__": "db0d2549-859a-4b84-9d51-4a4c04e30f0a"
+      },
+      {
+        "__uuid__": "2e25f36a-d08c-4c5e-91ee-562c1bd1d022"
+      },
+      {
+        "__uuid__": "354c8f1b-afd4-4558-8c31-caa4b4b3ea86"
+      },
+      {
+        "__uuid__": "8fb2f63f-6545-437d-a767-34362ec8de18"
+      },
+      {
+        "__uuid__": "af9fda52-8eeb-4a80-b4af-8c7f9631d1d2"
+      }
+    ],
+    "smallJumpFrame": {
+      "__uuid__": "db0d2549-859a-4b84-9d51-4a4c04e30f0a"
+    },
+    "smallDeathFrame": {
+      "__uuid__": "b51d1738-43ee-4969-ab74-3da449b49da6"
+    },
+    "bigIdleFrame": {
+      "__uuid__": "6f791530-8309-4aac-8165-db9959312fac"
+    },
+    "bigWalkFrames": [
+      {
+        "__uuid__": "fce99094-84c4-456f-acd7-6d52b1fec6d9"
+      },
+      {
+        "__uuid__": "1e7b5cc6-a6d6-4f83-800a-85069904bbcb"
+      }
+    ],
+    "bigJumpLowFrame": {
+      "__uuid__": "fce99094-84c4-456f-acd7-6d52b1fec6d9"
+    },
+    "bigJumpHighFrame": {
+      "__uuid__": "93a0e51d-a065-4e45-9a97-da6c41b76976"
+    },
+    "walkAnimationInterval": 0.12,
+    "bigJumpHighThreshold": 80,
     "_id": "25x6J/rWtHO65q7+t9y3vX"
   },
   {
