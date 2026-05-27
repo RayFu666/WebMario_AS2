@@ -1,3 +1,4 @@
+import PlayerController from "../player/PlayerController";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -183,6 +184,27 @@ export default class EnemyController extends cc.Component {
     }
 
     private hurtPlayer(): void {
+        if (!this.playerNode) {
+            return;
+        }
+
+        const playerController = this.playerNode.getComponent(PlayerController);
+
+        if (playerController) {
+            const shouldLoseLife = playerController.takeEnemyDamage();
+
+            if (!shouldLoseLife) {
+                if (this.gameManagerNode) {
+                    const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
+                    if (gameManager && gameManager.playPowerDownSound) {
+                        gameManager.playPowerDownSound();
+                    }
+                }
+
+                return;
+            }
+        }
+
         if (this.gameManagerNode) {
             const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
             if (gameManager) {

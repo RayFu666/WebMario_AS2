@@ -1206,9 +1206,9 @@
     "audioManagerNode": {
       "__id__": 49
     },
-    "maxLife": 3,
     "fallLimitY": -450,
     "startTime": 120,
+    "deathTransitionDelay": 1.8,
     "_id": "b1Hx1PMOBOOK2vp7spZTUh"
   },
   {
@@ -2934,6 +2934,9 @@
     "jumpSpeed": 500,
     "bigMarioFrame": {
       "__uuid__": "a2fa6d49-0e26-4350-ab07-ddd2770fa11e"
+    },
+    "smallMarioFrame": {
+      "__uuid__": "f7df941f-acde-4c29-b5a4-650fb20cf4e8"
     },
     "audioManagerNode": {
       "__id__": 49

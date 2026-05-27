@@ -14,20 +14,39 @@ export default class PlayerController extends cc.Component {
     @property(cc.SpriteFrame)
     bigMarioFrame: cc.SpriteFrame = null;
 
+    @property(cc.SpriteFrame)
+    smallMarioFrame: cc.SpriteFrame = null;
+
     @property(cc.Node)
     audioManagerNode: cc.Node = null;
 
     private rigidBody: cc.RigidBody = null;
     private moveDir: number = 0;
     private isBig: boolean = false;
+    private smallWidth: number = 64;
+    private smallHeight: number = 64;
+    private smallColliderWidth: number = 44;
+    private smallColliderHeight: number = 58;
+    private smallColliderOffsetY: number = -2;
 
     onLoad(): void {
         this.rigidBody = this.getComponent(cc.RigidBody);
-
+        const sprite = this.getComponent(cc.Sprite);
+        if (sprite && !this.smallMarioFrame) {
+            this.smallMarioFrame = sprite.spriteFrame;
+        }
+        this.focusGameCanvas();
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
     }
+    private focusGameCanvas(): void {
+        const canvas = cc.game.canvas as HTMLCanvasElement;
 
+        if (canvas) {
+            canvas.setAttribute('tabindex', '0');
+            canvas.focus();
+        }
+    }
     onDestroy(): void {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
@@ -80,6 +99,44 @@ export default class PlayerController extends cc.Component {
         if (collider) {
             collider.size = cc.size(44, 108);
             collider.offset = cc.v2(0, 0);
+            collider.apply();
+        }
+    }
+
+    public isBigMario(): boolean {
+        return this.isBig;
+    }
+
+    public takeEnemyDamage(): boolean {
+        if (this.isBig) {
+            this.becomeSmall();
+            return false;
+        }
+
+        return true;
+    }
+
+    private becomeSmall(): void {
+        if (!this.isBig) {
+            return;
+        }
+
+        this.isBig = false;
+
+        const oldBottom = this.node.y - this.node.height / 2;
+
+        const sprite = this.getComponent(cc.Sprite);
+        if (sprite && this.smallMarioFrame) {
+            sprite.spriteFrame = this.smallMarioFrame;
+        }
+
+        this.node.setContentSize(this.smallWidth, this.smallHeight);
+        this.node.y = oldBottom + this.node.height / 2;
+
+        const collider = this.getComponent(cc.PhysicsBoxCollider);
+        if (collider) {
+            collider.size = cc.size(this.smallColliderWidth, this.smallColliderHeight);
+            collider.offset = cc.v2(0, this.smallColliderOffsetY);
             collider.apply();
         }
     }

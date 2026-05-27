@@ -5,12 +5,12 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class GameStartController extends cc.Component {
     @property
-    delaySeconds: number = 2;
+    delaySeconds: number = 2.5;
 
     start(): void {
-        this.scheduleOnce(() => {
+        window.setTimeout(() => {
             const targetScene = GameSession.instance ? GameSession.instance.selectedLevel : 'Level1';
             cc.director.loadScene(targetScene);
-        }, this.delaySeconds);
+        }, this.delaySeconds * 1000);
     }
 }

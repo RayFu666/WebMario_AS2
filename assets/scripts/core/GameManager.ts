@@ -36,13 +36,11 @@ export default class GameManager extends cc.Component {
     private isChangingScene: boolean = false;
 
     start(): void {
+        this.ensureGameSession();
+
         this.timeLeft = this.startTime;
         this.timerAcc = 0;
         this.isChangingScene = false;
-
-        if (!GameSession.instance) {
-            cc.warn('GameSession is missing');
-        }
 
         this.updateAllUI();
     }
@@ -56,7 +54,27 @@ export default class GameManager extends cc.Component {
         this.checkPlayerFall();
     }
 
+    private ensureGameSession(): void {
+        if (GameSession.instance) {
+            return;
+        }
+
+        const scene = cc.director.getScene();
+        if (!scene) {
+            return;
+        }
+
+        const sessionNode = new cc.Node('GameSession');
+        scene.addChild(sessionNode);
+
+        const session = sessionNode.addComponent(GameSession);
+        session.resetForNewGame();
+        session.selectedLevel = 'Level1';
+    }
+
     public addScore(value: number): void {
+        this.ensureGameSession();
+
         if (GameSession.instance) {
             GameSession.instance.addScore(value);
         }
@@ -65,6 +83,8 @@ export default class GameManager extends cc.Component {
     }
 
     public addCoin(value: number): void {
+        this.ensureGameSession();
+
         if (GameSession.instance) {
             GameSession.instance.addCoin(value);
         }
@@ -77,21 +97,22 @@ export default class GameManager extends cc.Component {
             return;
         }
 
+        this.ensureGameSession();
+
         this.isChangingScene = true;
         this.stopBGM();
         this.freezeLevelObjects();
 
         if (!GameSession.instance) {
-            this.playGameOverSound();
             this.scheduleOnce(() => {
                 this.goToGameOver();
             }, this.deathTransitionDelay);
             return;
         }
 
-        if (GameSession.instance.life <= 1) {
-            this.playLoseOneLifeSound();
+        this.playLoseOneLifeSound();
 
+        if (GameSession.instance.life <= 1) {
             this.scheduleOnce(() => {
                 GameSession.instance.loseLife();
                 this.goToGameOver();
@@ -99,8 +120,6 @@ export default class GameManager extends cc.Component {
 
             return;
         }
-
-        this.playLoseOneLifeSound();
 
         this.scheduleOnce(() => {
             GameSession.instance.loseLife();
@@ -216,15 +235,6 @@ export default class GameManager extends cc.Component {
             const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
             if (audioManager && audioManager.playLoseOneLife) {
                 audioManager.playLoseOneLife();
-            }
-        }
-    }
-
-    private playGameOverSound(): void {
-        if (this.audioManagerNode) {
-            const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
-            if (audioManager && audioManager.playGameOver) {
-                audioManager.playGameOver();
             }
         }
     }
