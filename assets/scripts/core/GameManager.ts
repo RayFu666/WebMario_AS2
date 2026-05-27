@@ -1,3 +1,5 @@
+import GameSession from "./GameSession";
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -21,39 +23,32 @@ export default class GameManager extends cc.Component {
     audioManagerNode: cc.Node = null;
 
     @property
-    maxLife: number = 3;
-
-    @property
     fallLimitY: number = -450;
 
     @property
     startTime: number = 120;
 
-    private currentLife: number = 3;
-    private score: number = 0;
-    private coin: number = 0;
+    @property
+    deathTransitionDelay: number = 1.8;
+
     private timeLeft: number = 120;
     private timerAcc: number = 0;
-    private playerStartPos: cc.Vec2 = cc.v2(0, 0);
-    private isGameOver: boolean = false;
+    private isChangingScene: boolean = false;
 
     start(): void {
-        this.currentLife = this.maxLife;
-        this.score = 0;
-        this.coin = 0;
         this.timeLeft = this.startTime;
         this.timerAcc = 0;
-        this.isGameOver = false;
+        this.isChangingScene = false;
 
-        if (this.player) {
-            this.playerStartPos = cc.v2(this.player.x, this.player.y);
+        if (!GameSession.instance) {
+            cc.warn('GameSession is missing');
         }
 
         this.updateAllUI();
     }
 
     update(dt: number): void {
-        if (this.isGameOver) {
+        if (this.isChangingScene) {
             return;
         }
 
@@ -62,31 +57,109 @@ export default class GameManager extends cc.Component {
     }
 
     public addScore(value: number): void {
-        this.score += value;
+        if (GameSession.instance) {
+            GameSession.instance.addScore(value);
+        }
+
         this.updateScoreUI();
     }
 
     public addCoin(value: number): void {
-        this.coin += value;
+        if (GameSession.instance) {
+            GameSession.instance.addCoin(value);
+        }
+
         this.updateCoinUI();
     }
 
     public playerDie(): void {
-        if (this.isGameOver) {
+        if (this.isChangingScene) {
             return;
         }
 
-        this.playDieSound();
+        this.isChangingScene = true;
+        this.stopBGM();
+        this.freezeLevelObjects();
 
-        this.currentLife--;
-
-        if (this.currentLife <= 0) {
-            this.goToGameOver();
+        if (!GameSession.instance) {
+            this.playGameOverSound();
+            this.scheduleOnce(() => {
+                this.goToGameOver();
+            }, this.deathTransitionDelay);
             return;
         }
 
-        this.respawnPlayer();
-        this.updateLifeUI();
+        if (GameSession.instance.life <= 1) {
+            this.playLoseOneLifeSound();
+
+            this.scheduleOnce(() => {
+                GameSession.instance.loseLife();
+                this.goToGameOver();
+            }, this.deathTransitionDelay);
+
+            return;
+        }
+
+        this.playLoseOneLifeSound();
+
+        this.scheduleOnce(() => {
+            GameSession.instance.loseLife();
+            this.goToGameStart();
+        }, this.deathTransitionDelay);
+    }
+
+    private freezeLevelObjects(): void {
+        this.freezePlayer();
+        this.freezeNodeByName('Enemy', 'EnemyController');
+        this.freezeNodeByName('Mushroom', 'MushroomController');
+        this.freezeNodeByName('QuestionBlock', 'QuestionBlockController');
+    }
+
+    private freezePlayer(): void {
+        if (!this.player) {
+            return;
+        }
+
+        const playerController = this.player.getComponent('PlayerController') as any;
+        if (playerController) {
+            playerController.enabled = false;
+        }
+
+        this.freezePhysicsBody(this.player);
+    }
+
+    private freezeNodeByName(nodeName: string, componentName: string): void {
+        const scene = cc.director.getScene();
+        if (!scene) {
+            return;
+        }
+
+        this.freezeNodeRecursive(scene, nodeName, componentName);
+    }
+
+    private freezeNodeRecursive(node: cc.Node, nodeName: string, componentName: string): void {
+        if (node.name === nodeName) {
+            const component = node.getComponent(componentName) as any;
+            if (component) {
+                component.enabled = false;
+            }
+
+            this.freezePhysicsBody(node);
+        }
+
+        for (let i = 0; i < node.children.length; i++) {
+            this.freezeNodeRecursive(node.children[i], nodeName, componentName);
+        }
+    }
+
+    private freezePhysicsBody(node: cc.Node): void {
+        const rigidBody = node.getComponent(cc.RigidBody);
+
+        if (rigidBody) {
+            rigidBody.linearVelocity = cc.v2(0, 0);
+            rigidBody.angularVelocity = 0;
+            rigidBody.type = cc.RigidBodyType.Static;
+        }
     }
 
     private checkPlayerFall(): void {
@@ -99,32 +172,17 @@ export default class GameManager extends cc.Component {
         }
     }
 
-    private respawnPlayer(): void {
-        if (!this.player) {
-            return;
-        }
-
-        this.player.setPosition(this.playerStartPos);
-
-        const rigidBody = this.player.getComponent(cc.RigidBody);
-        if (rigidBody) {
-            rigidBody.linearVelocity = cc.v2(0, 0);
-            rigidBody.angularVelocity = 0;
-        }
-    }
-
     private updateTimer(dt: number): void {
         this.timerAcc += dt;
 
         while (this.timerAcc >= 1) {
             this.timerAcc -= 1;
-
             this.timeLeft--;
 
             if (this.timeLeft <= 0) {
                 this.timeLeft = 0;
                 this.updateTimerUI();
-                this.goToGameOver();
+                this.playerDie();
                 return;
             }
 
@@ -132,18 +190,49 @@ export default class GameManager extends cc.Component {
         }
     }
 
-    private playDieSound(): void {
+    private goToGameStart(): void {
+        if (GameSession.instance) {
+            GameSession.instance.selectedLevel = 'Level1';
+        }
+
+        cc.director.loadScene('GameStart');
+    }
+
+    private goToGameOver(): void {
+        cc.director.loadScene('GameOver');
+    }
+
+    private stopBGM(): void {
         if (this.audioManagerNode) {
             const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
-            if (audioManager) {
+            if (audioManager && audioManager.stopBGM) {
+                audioManager.stopBGM();
+            }
+        }
+    }
+
+    private playLoseOneLifeSound(): void {
+        if (this.audioManagerNode) {
+            const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
+            if (audioManager && audioManager.playLoseOneLife) {
                 audioManager.playLoseOneLife();
             }
         }
     }
+
+    private playGameOverSound(): void {
+        if (this.audioManagerNode) {
+            const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
+            if (audioManager && audioManager.playGameOver) {
+                audioManager.playGameOver();
+            }
+        }
+    }
+
     public playPowerUpSound(): void {
         if (this.audioManagerNode) {
             const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
-            if (audioManager) {
+            if (audioManager && audioManager.playPowerUp) {
                 audioManager.playPowerUp();
             }
         }
@@ -152,7 +241,7 @@ export default class GameManager extends cc.Component {
     public playPowerDownSound(): void {
         if (this.audioManagerNode) {
             const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
-            if (audioManager) {
+            if (audioManager && audioManager.playPowerDown) {
                 audioManager.playPowerDown();
             }
         }
@@ -161,7 +250,7 @@ export default class GameManager extends cc.Component {
     public playPowerUpAppearSound(): void {
         if (this.audioManagerNode) {
             const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
-            if (audioManager) {
+            if (audioManager && audioManager.playPowerUpAppear) {
                 audioManager.playPowerUpAppear();
             }
         }
@@ -170,15 +259,10 @@ export default class GameManager extends cc.Component {
     public playKickSound(): void {
         if (this.audioManagerNode) {
             const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
-            if (audioManager) {
+            if (audioManager && audioManager.playKick) {
                 audioManager.playKick();
             }
         }
-    }
-
-    private goToGameOver(): void {
-        this.isGameOver = true;
-        cc.director.loadScene('GameOver');
     }
 
     private updateAllUI(): void {
@@ -190,13 +274,15 @@ export default class GameManager extends cc.Component {
 
     private updateLifeUI(): void {
         if (this.lifeLabel) {
-            this.lifeLabel.string = '' + this.currentLife;
+            const life = GameSession.instance ? GameSession.instance.life : 3;
+            this.lifeLabel.string = '' + life;
         }
     }
 
     private updateScoreUI(): void {
         if (this.scoreLabel) {
-            this.scoreLabel.string = this.padScore(this.score);
+            const score = GameSession.instance ? GameSession.instance.score : 0;
+            this.scoreLabel.string = this.padScore(score);
         }
     }
 
@@ -208,7 +294,8 @@ export default class GameManager extends cc.Component {
 
     private updateCoinUI(): void {
         if (this.coinLabel) {
-            this.coinLabel.string = '' + this.coin;
+            const coin = GameSession.instance ? GameSession.instance.coin : 0;
+            this.coinLabel.string = '' + coin;
         }
     }
 

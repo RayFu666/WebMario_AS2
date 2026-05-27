@@ -1,3 +1,5 @@
+import GameSession from "./GameSession";
+
 const { ccclass } = cc._decorator;
 
 @ccclass
@@ -11,7 +13,12 @@ export default class SceneLoader extends cc.Component {
     }
 
     public loadLevel1(): void {
-        cc.director.loadScene('Level1');
+        if (GameSession.instance) {
+            GameSession.instance.resetForNewGame();
+            GameSession.instance.selectedLevel = 'Level1';
+        }
+
+        cc.director.loadScene('GameStart');
     }
 
     public loadGameOver(): void {
