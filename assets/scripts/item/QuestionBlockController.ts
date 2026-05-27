@@ -143,7 +143,7 @@ export default class QuestionBlockController extends cc.Component {
         controller.blockTopY = blockTopY;
         controller.blockRightX = blockRightX;
         controller.blockZIndex = this.node.zIndex;
-        controller.groundY = -194;
+        controller.groundY = -243;
 
         cc.log('spawn mushroom size = ' + mushroom.width + ', ' + mushroom.height);
     }
