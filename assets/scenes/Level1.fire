@@ -87,13 +87,13 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 116
+        "__id__": 146
       },
       {
-        "__id__": 117
+        "__id__": 147
       },
       {
-        "__id__": 118
+        "__id__": 148
       }
     ],
     "_prefab": null,
@@ -273,16 +273,16 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 112
+        "__id__": 142
       },
       {
-        "__id__": 113
+        "__id__": 143
       },
       {
-        "__id__": 114
+        "__id__": 144
       },
       {
-        "__id__": 115
+        "__id__": 145
       }
     ],
     "_prefab": null,
@@ -351,10 +351,10 @@
         "__id__": 6
       },
       {
-        "__id__": 100
+        "__id__": 130
       },
       {
-        "__id__": 110
+        "__id__": 140
       }
     ],
     "_active": true,
@@ -543,7 +543,25 @@
         "__id__": 92
       },
       {
-        "__id__": 99
+        "__id__": 97
+      },
+      {
+        "__id__": 102
+      },
+      {
+        "__id__": 107
+      },
+      {
+        "__id__": 112
+      },
+      {
+        "__id__": 117
+      },
+      {
+        "__id__": 122
+      },
+      {
+        "__id__": 129
       }
     ],
     "_active": true,
@@ -3794,7 +3812,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "QuestionBlock_Coin_1",
+    "_name": "QuestionBlock_Mushroom_2",
     "_objFlags": 0,
     "_parent": {
       "__id__": 10
@@ -3813,6 +3831,416 @@
       },
       {
         "__id__": 86
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 64,
+      "height": 64
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        -544,
+        96,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "a3wqeMljBDqKqcSXihjP3J"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 82
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": {
+      "__uuid__": "e9d7ad33-144a-498f-8976-7ae6f76467f9"
+    },
+    "_id": "0aN3EsnFxPR4F61+zIwRgg"
+  },
+  {
+    "__type__": "cc.RigidBody",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 82
+    },
+    "_enabled": true,
+    "_type": 0,
+    "_allowSleep": true,
+    "_gravityScale": 1,
+    "_linearDamping": 0,
+    "_angularDamping": 0,
+    "_linearVelocity": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_angularVelocity": 0,
+    "_fixedRotation": false,
+    "enabledContactListener": false,
+    "bullet": false,
+    "awakeOnLoad": true,
+    "_id": "31ae4ZJMVCdoJmp/5cmFAN"
+  },
+  {
+    "__type__": "cc.PhysicsBoxCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 82
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_density": 1,
+    "_sensor": false,
+    "_friction": 0,
+    "_restitution": 0,
+    "body": null,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 48,
+      "height": 48
+    },
+    "_id": "e4tFFuTQFOK73NGZpxbDrs"
+  },
+  {
+    "__type__": "75f95YRAEVHHaFouwj+D0Xc",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 82
+    },
+    "_enabled": true,
+    "playerNode": {
+      "__id__": 6
+    },
+    "gameManagerNode": {
+      "__id__": 25
+    },
+    "questionFrames": [
+      {
+        "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+      },
+      {
+        "__uuid__": "5980500c-f106-4be2-93ce-ef94b13916ff"
+      },
+      {
+        "__uuid__": "915e1d84-aa09-4666-83cc-c3fa84a3cfc5"
+      },
+      {
+        "__uuid__": "6bd44b54-8601-4a7b-96ff-b8f2c2552e22"
+      }
+    ],
+    "usedFrame": {
+      "__uuid__": "5f518e9c-e899-4d9b-b1cd-6ed492859a05"
+    },
+    "mushroomFrame": {
+      "__uuid__": "5561780c-bacc-4b0e-bc2a-f755cdb73ffa"
+    },
+    "coinFrames": [],
+    "scoreFont": {
+      "__uuid__": "0d193dd4-f565-41f8-9acf-d2e436e53c93"
+    },
+    "blockType": 0,
+    "spawnOffsetY": 40,
+    "animationInterval": 0.3,
+    "hitTolerance": 8,
+    "mushroomSize": 48,
+    "mushroomGroundY": -232,
+    "coinSize": 40,
+    "coinJumpHeight": 70,
+    "coinAnimInterval": 0.06,
+    "_id": "a4z7/5YdFFqK/5neKlDB/e"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "QuestionBlock_Mushroom_3",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 10
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 88
+      },
+      {
+        "__id__": 89
+      },
+      {
+        "__id__": 90
+      },
+      {
+        "__id__": 91
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 64,
+      "height": 64
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        800,
+        224,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "12In8q8vZMF7baVMn8UsAy"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 87
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": {
+      "__uuid__": "e9d7ad33-144a-498f-8976-7ae6f76467f9"
+    },
+    "_id": "7b0kYdRENIa5cgz2j2IUSD"
+  },
+  {
+    "__type__": "cc.RigidBody",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 87
+    },
+    "_enabled": true,
+    "_type": 0,
+    "_allowSleep": true,
+    "_gravityScale": 1,
+    "_linearDamping": 0,
+    "_angularDamping": 0,
+    "_linearVelocity": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_angularVelocity": 0,
+    "_fixedRotation": false,
+    "enabledContactListener": false,
+    "bullet": false,
+    "awakeOnLoad": true,
+    "_id": "49VsIKdUpBQov3So9JTkct"
+  },
+  {
+    "__type__": "cc.PhysicsBoxCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 87
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_density": 1,
+    "_sensor": false,
+    "_friction": 0,
+    "_restitution": 0,
+    "body": null,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 48,
+      "height": 48
+    },
+    "_id": "0aRbfZk4dCZrBbxgP11wp4"
+  },
+  {
+    "__type__": "75f95YRAEVHHaFouwj+D0Xc",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 87
+    },
+    "_enabled": true,
+    "playerNode": {
+      "__id__": 6
+    },
+    "gameManagerNode": {
+      "__id__": 25
+    },
+    "questionFrames": [
+      {
+        "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+      },
+      {
+        "__uuid__": "5980500c-f106-4be2-93ce-ef94b13916ff"
+      },
+      {
+        "__uuid__": "915e1d84-aa09-4666-83cc-c3fa84a3cfc5"
+      },
+      {
+        "__uuid__": "6bd44b54-8601-4a7b-96ff-b8f2c2552e22"
+      }
+    ],
+    "usedFrame": {
+      "__uuid__": "5f518e9c-e899-4d9b-b1cd-6ed492859a05"
+    },
+    "mushroomFrame": {
+      "__uuid__": "5561780c-bacc-4b0e-bc2a-f755cdb73ffa"
+    },
+    "coinFrames": [],
+    "scoreFont": {
+      "__uuid__": "0d193dd4-f565-41f8-9acf-d2e436e53c93"
+    },
+    "blockType": 0,
+    "spawnOffsetY": 40,
+    "animationInterval": 0.3,
+    "hitTolerance": 8,
+    "mushroomSize": 48,
+    "mushroomGroundY": -232,
+    "coinSize": 40,
+    "coinJumpHeight": 70,
+    "coinAnimInterval": 0.06,
+    "_id": "4cKIi9aLRMdLwqBVGi0H9E"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "QuestionBlock_Coin_1",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 10
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 93
+      },
+      {
+        "__id__": 94
+      },
+      {
+        "__id__": 95
+      },
+      {
+        "__id__": 96
       }
     ],
     "_prefab": null,
@@ -3868,7 +4296,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 82
+      "__id__": 92
     },
     "_enabled": true,
     "_materials": [
@@ -3902,7 +4330,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 82
+      "__id__": 92
     },
     "_enabled": true,
     "_type": 0,
@@ -3927,7 +4355,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 82
+      "__id__": 92
     },
     "_enabled": true,
     "tag": 0,
@@ -3953,7 +4381,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 82
+      "__id__": 92
     },
     "_enabled": true,
     "playerNode": {
@@ -4000,8 +4428,8 @@
     "hitTolerance": 8,
     "mushroomSize": 48,
     "mushroomGroundY": -243,
-    "coinSize": 100,
-    "coinJumpHeight": 100,
+    "coinSize": 32,
+    "coinJumpHeight": 70,
     "coinAnimInterval": 0.06,
     "_id": "bb73qBjiNBn7bXb0S2AgmW"
   },
@@ -4016,16 +4444,16 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 88
+        "__id__": 98
       },
       {
-        "__id__": 89
+        "__id__": 99
       },
       {
-        "__id__": 90
+        "__id__": 100
       },
       {
-        "__id__": 91
+        "__id__": 101
       }
     ],
     "_prefab": null,
@@ -4081,7 +4509,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 87
+      "__id__": 97
     },
     "_enabled": true,
     "_materials": [
@@ -4115,7 +4543,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 87
+      "__id__": 97
     },
     "_enabled": true,
     "_type": 0,
@@ -4140,7 +4568,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 87
+      "__id__": 97
     },
     "_enabled": true,
     "tag": 0,
@@ -4166,7 +4594,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 87
+      "__id__": 97
     },
     "_enabled": true,
     "playerNode": {
@@ -4215,10 +4643,862 @@
     "hitTolerance": 8,
     "mushroomSize": 48,
     "mushroomGroundY": -243,
-    "coinSize": 100,
-    "coinJumpHeight": 100,
+    "coinSize": 32,
+    "coinJumpHeight": 70,
     "coinAnimInterval": 0.06,
     "_id": "dfSjpMT+lMqp/lYvcvWmz9"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "QuestionBlock_Coin_3",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 10
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 103
+      },
+      {
+        "__id__": 104
+      },
+      {
+        "__id__": 105
+      },
+      {
+        "__id__": 106
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 64,
+      "height": 64
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        -544,
+        -96,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "e3TAxwnWhMT5Qi/wmA4FFt"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 102
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": {
+      "__uuid__": "e9d7ad33-144a-498f-8976-7ae6f76467f9"
+    },
+    "_id": "56euZP7RJBnplv9YN1Fe3Y"
+  },
+  {
+    "__type__": "cc.RigidBody",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 102
+    },
+    "_enabled": true,
+    "_type": 0,
+    "_allowSleep": true,
+    "_gravityScale": 1,
+    "_linearDamping": 0,
+    "_angularDamping": 0,
+    "_linearVelocity": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_angularVelocity": 0,
+    "_fixedRotation": false,
+    "enabledContactListener": false,
+    "bullet": false,
+    "awakeOnLoad": true,
+    "_id": "bblGWdZmRG/7gLf5Q3lpN1"
+  },
+  {
+    "__type__": "cc.PhysicsBoxCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 102
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_density": 1,
+    "_sensor": false,
+    "_friction": 0,
+    "_restitution": 0,
+    "body": null,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 48,
+      "height": 48
+    },
+    "_id": "abMSzVjIRAEoRBRjK1G1Zp"
+  },
+  {
+    "__type__": "75f95YRAEVHHaFouwj+D0Xc",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 102
+    },
+    "_enabled": true,
+    "playerNode": {
+      "__id__": 6
+    },
+    "gameManagerNode": {
+      "__id__": 25
+    },
+    "questionFrames": [
+      {
+        "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+      },
+      {
+        "__uuid__": "5980500c-f106-4be2-93ce-ef94b13916ff"
+      },
+      {
+        "__uuid__": "915e1d84-aa09-4666-83cc-c3fa84a3cfc5"
+      },
+      {
+        "__uuid__": "6bd44b54-8601-4a7b-96ff-b8f2c2552e22"
+      }
+    ],
+    "usedFrame": {
+      "__uuid__": "5f518e9c-e899-4d9b-b1cd-6ed492859a05"
+    },
+    "mushroomFrame": null,
+    "coinFrames": [
+      {
+        "__uuid__": "2a594661-3c64-4a6c-bb3d-2d92ec13a283"
+      },
+      {
+        "__uuid__": "39088dc1-6eda-45f0-8da0-4cd53baf1567"
+      },
+      {
+        "__uuid__": "41a56085-8917-4962-94a2-79803afb7d56"
+      }
+    ],
+    "scoreFont": {
+      "__uuid__": "0d193dd4-f565-41f8-9acf-d2e436e53c93"
+    },
+    "blockType": 1,
+    "spawnOffsetY": 40,
+    "animationInterval": 0.3,
+    "hitTolerance": 8,
+    "mushroomSize": 48,
+    "mushroomGroundY": -243,
+    "coinSize": 32,
+    "coinJumpHeight": 70,
+    "coinAnimInterval": 0.06,
+    "_id": "ecvuCWppxF15rCkv6hdA5n"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "QuestionBlock_Coin_4",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 10
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 108
+      },
+      {
+        "__id__": 109
+      },
+      {
+        "__id__": 110
+      },
+      {
+        "__id__": 111
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 64,
+      "height": 64
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        -418,
+        96,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "69uYUyMVhPubVMGI5O8Dkc"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 107
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": {
+      "__uuid__": "e9d7ad33-144a-498f-8976-7ae6f76467f9"
+    },
+    "_id": "b6EkeVknFCSqiVc3vvmie6"
+  },
+  {
+    "__type__": "cc.RigidBody",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 107
+    },
+    "_enabled": true,
+    "_type": 0,
+    "_allowSleep": true,
+    "_gravityScale": 1,
+    "_linearDamping": 0,
+    "_angularDamping": 0,
+    "_linearVelocity": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_angularVelocity": 0,
+    "_fixedRotation": false,
+    "enabledContactListener": false,
+    "bullet": false,
+    "awakeOnLoad": true,
+    "_id": "851Eu6xThEBZVEqAhqvzPk"
+  },
+  {
+    "__type__": "cc.PhysicsBoxCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 107
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_density": 1,
+    "_sensor": false,
+    "_friction": 0,
+    "_restitution": 0,
+    "body": null,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 48,
+      "height": 48
+    },
+    "_id": "abD9Kw92BBnoVqUBfpVi0s"
+  },
+  {
+    "__type__": "75f95YRAEVHHaFouwj+D0Xc",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 107
+    },
+    "_enabled": true,
+    "playerNode": {
+      "__id__": 6
+    },
+    "gameManagerNode": {
+      "__id__": 25
+    },
+    "questionFrames": [
+      {
+        "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+      },
+      {
+        "__uuid__": "5980500c-f106-4be2-93ce-ef94b13916ff"
+      },
+      {
+        "__uuid__": "915e1d84-aa09-4666-83cc-c3fa84a3cfc5"
+      },
+      {
+        "__uuid__": "6bd44b54-8601-4a7b-96ff-b8f2c2552e22"
+      }
+    ],
+    "usedFrame": {
+      "__uuid__": "5f518e9c-e899-4d9b-b1cd-6ed492859a05"
+    },
+    "mushroomFrame": null,
+    "coinFrames": [
+      {
+        "__uuid__": "2a594661-3c64-4a6c-bb3d-2d92ec13a283"
+      },
+      {
+        "__uuid__": "39088dc1-6eda-45f0-8da0-4cd53baf1567"
+      },
+      {
+        "__uuid__": "41a56085-8917-4962-94a2-79803afb7d56"
+      }
+    ],
+    "scoreFont": {
+      "__uuid__": "0d193dd4-f565-41f8-9acf-d2e436e53c93"
+    },
+    "blockType": 1,
+    "spawnOffsetY": 40,
+    "animationInterval": 0.3,
+    "hitTolerance": 8,
+    "mushroomSize": 48,
+    "mushroomGroundY": -243,
+    "coinSize": 32,
+    "coinJumpHeight": 70,
+    "coinAnimInterval": 0.06,
+    "_id": "daEkj9pV5CXaypoXSG3YlU"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "QuestionBlock_Coin_5",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 10
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 113
+      },
+      {
+        "__id__": 114
+      },
+      {
+        "__id__": 115
+      },
+      {
+        "__id__": 116
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 64,
+      "height": 64
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        -418,
+        -96,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "ccAXeDUJhKEKTPRpQGRfB3"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 112
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": {
+      "__uuid__": "e9d7ad33-144a-498f-8976-7ae6f76467f9"
+    },
+    "_id": "27xoVM+lJP6Y7O0+llxtW+"
+  },
+  {
+    "__type__": "cc.RigidBody",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 112
+    },
+    "_enabled": true,
+    "_type": 0,
+    "_allowSleep": true,
+    "_gravityScale": 1,
+    "_linearDamping": 0,
+    "_angularDamping": 0,
+    "_linearVelocity": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_angularVelocity": 0,
+    "_fixedRotation": false,
+    "enabledContactListener": false,
+    "bullet": false,
+    "awakeOnLoad": true,
+    "_id": "783xmNM5FPxLM29H7hkCZI"
+  },
+  {
+    "__type__": "cc.PhysicsBoxCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 112
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_density": 1,
+    "_sensor": false,
+    "_friction": 0,
+    "_restitution": 0,
+    "body": null,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 48,
+      "height": 48
+    },
+    "_id": "5fPIXkYgZLUIuJRpIho56H"
+  },
+  {
+    "__type__": "75f95YRAEVHHaFouwj+D0Xc",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 112
+    },
+    "_enabled": true,
+    "playerNode": {
+      "__id__": 6
+    },
+    "gameManagerNode": {
+      "__id__": 25
+    },
+    "questionFrames": [
+      {
+        "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+      },
+      {
+        "__uuid__": "5980500c-f106-4be2-93ce-ef94b13916ff"
+      },
+      {
+        "__uuid__": "915e1d84-aa09-4666-83cc-c3fa84a3cfc5"
+      },
+      {
+        "__uuid__": "6bd44b54-8601-4a7b-96ff-b8f2c2552e22"
+      }
+    ],
+    "usedFrame": {
+      "__uuid__": "5f518e9c-e899-4d9b-b1cd-6ed492859a05"
+    },
+    "mushroomFrame": null,
+    "coinFrames": [
+      {
+        "__uuid__": "2a594661-3c64-4a6c-bb3d-2d92ec13a283"
+      },
+      {
+        "__uuid__": "39088dc1-6eda-45f0-8da0-4cd53baf1567"
+      },
+      {
+        "__uuid__": "41a56085-8917-4962-94a2-79803afb7d56"
+      }
+    ],
+    "scoreFont": {
+      "__uuid__": "0d193dd4-f565-41f8-9acf-d2e436e53c93"
+    },
+    "blockType": 1,
+    "spawnOffsetY": 40,
+    "animationInterval": 0.3,
+    "hitTolerance": 8,
+    "mushroomSize": 48,
+    "mushroomGroundY": -243,
+    "coinSize": 32,
+    "coinJumpHeight": 70,
+    "coinAnimInterval": 0.06,
+    "_id": "0aIRVzqKVJV5IJBJ0w4UTR"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "QuestionBlock_Coin_6",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 10
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 118
+      },
+      {
+        "__id__": 119
+      },
+      {
+        "__id__": 120
+      },
+      {
+        "__id__": 121
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 64,
+      "height": 64
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        928,
+        224,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "a7UWWu3BFP8J4F9ZKR7Y5i"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 117
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": {
+      "__uuid__": "e9d7ad33-144a-498f-8976-7ae6f76467f9"
+    },
+    "_id": "bfXBTVIx9LUYaEU1jzBV9p"
+  },
+  {
+    "__type__": "cc.RigidBody",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 117
+    },
+    "_enabled": true,
+    "_type": 0,
+    "_allowSleep": true,
+    "_gravityScale": 1,
+    "_linearDamping": 0,
+    "_angularDamping": 0,
+    "_linearVelocity": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_angularVelocity": 0,
+    "_fixedRotation": false,
+    "enabledContactListener": false,
+    "bullet": false,
+    "awakeOnLoad": true,
+    "_id": "fdr5Z7T9VCEIp8RNI5hQJd"
+  },
+  {
+    "__type__": "cc.PhysicsBoxCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 117
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_density": 1,
+    "_sensor": false,
+    "_friction": 0,
+    "_restitution": 0,
+    "body": null,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 48,
+      "height": 48
+    },
+    "_id": "c00eV0OldPcZjxO9mfxZpT"
+  },
+  {
+    "__type__": "75f95YRAEVHHaFouwj+D0Xc",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 117
+    },
+    "_enabled": true,
+    "playerNode": {
+      "__id__": 6
+    },
+    "gameManagerNode": {
+      "__id__": 25
+    },
+    "questionFrames": [
+      {
+        "__uuid__": "d8a60fbb-ad5e-46ce-b45e-9a2697625f86"
+      },
+      {
+        "__uuid__": "5980500c-f106-4be2-93ce-ef94b13916ff"
+      },
+      {
+        "__uuid__": "915e1d84-aa09-4666-83cc-c3fa84a3cfc5"
+      },
+      {
+        "__uuid__": "6bd44b54-8601-4a7b-96ff-b8f2c2552e22"
+      }
+    ],
+    "usedFrame": {
+      "__uuid__": "5f518e9c-e899-4d9b-b1cd-6ed492859a05"
+    },
+    "mushroomFrame": null,
+    "coinFrames": [
+      {
+        "__uuid__": "2a594661-3c64-4a6c-bb3d-2d92ec13a283"
+      },
+      {
+        "__uuid__": "39088dc1-6eda-45f0-8da0-4cd53baf1567"
+      },
+      {
+        "__uuid__": "41a56085-8917-4962-94a2-79803afb7d56"
+      }
+    ],
+    "scoreFont": {
+      "__uuid__": "0d193dd4-f565-41f8-9acf-d2e436e53c93"
+    },
+    "blockType": 1,
+    "spawnOffsetY": 40,
+    "animationInterval": 0.3,
+    "hitTolerance": 8,
+    "mushroomSize": 48,
+    "mushroomGroundY": -243,
+    "coinSize": 32,
+    "coinJumpHeight": 70,
+    "coinAnimInterval": 0.06,
+    "_id": "ddu3OO17hDtpGuTUK5SXHA"
   },
   {
     "__type__": "cc.Node",
@@ -4229,13 +5509,13 @@
     },
     "_children": [
       {
-        "__id__": 93
+        "__id__": 123
       },
       {
-        "__id__": 95
+        "__id__": 125
       },
       {
-        "__id__": 97
+        "__id__": 127
       }
     ],
     "_active": true,
@@ -4293,13 +5573,13 @@
     "_name": "FlagPole",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 92
+      "__id__": 122
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 94
+        "__id__": 124
       }
     ],
     "_prefab": null,
@@ -4355,7 +5635,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 93
+      "__id__": 123
     },
     "_enabled": true,
     "_materials": [
@@ -4387,13 +5667,13 @@
     "_name": "FlagBase",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 92
+      "__id__": 122
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 96
+        "__id__": 126
       }
     ],
     "_prefab": null,
@@ -4449,7 +5729,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 95
+      "__id__": 125
     },
     "_enabled": true,
     "_materials": [
@@ -4481,13 +5761,13 @@
     "_name": "GoalTrigger",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 92
+      "__id__": 122
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 98
+        "__id__": 128
       }
     ],
     "_prefab": null,
@@ -4543,7 +5823,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 97
+      "__id__": 127
     },
     "_enabled": true,
     "playerNode": {
@@ -4622,22 +5902,22 @@
     },
     "_children": [
       {
-        "__id__": 101
+        "__id__": 131
       },
       {
-        "__id__": 103
+        "__id__": 133
       },
       {
-        "__id__": 105
+        "__id__": 135
       },
       {
-        "__id__": 107
+        "__id__": 137
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 109
+        "__id__": 139
       }
     ],
     "_prefab": null,
@@ -4693,13 +5973,13 @@
     "_name": "圖塊層 2",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 100
+      "__id__": 130
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 102
+        "__id__": 132
       }
     ],
     "_prefab": null,
@@ -4755,7 +6035,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 101
+      "__id__": 131
     },
     "_enabled": true,
     "_materials": [
@@ -4770,13 +6050,13 @@
     "_name": "圖塊層 1",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 100
+      "__id__": 130
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 104
+        "__id__": 134
       }
     ],
     "_prefab": null,
@@ -4832,7 +6112,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 103
+      "__id__": 133
     },
     "_enabled": true,
     "_materials": [
@@ -4847,13 +6127,13 @@
     "_name": "Collisions",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 100
+      "__id__": 130
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 106
+        "__id__": 136
       }
     ],
     "_prefab": null,
@@ -4909,7 +6189,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 105
+      "__id__": 135
     },
     "_enabled": true,
     "_id": "adD4H4QshIaYVzhE7UarGi"
@@ -4919,13 +6199,13 @@
     "_name": "OneWayPlatforms",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 100
+      "__id__": 130
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 108
+        "__id__": 138
       }
     ],
     "_prefab": null,
@@ -4981,7 +6261,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 107
+      "__id__": 137
     },
     "_enabled": true,
     "_id": "2aN0DDX4JN8J9yJvuI5RWi"
@@ -4991,7 +6271,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 100
+      "__id__": 130
     },
     "_enabled": true,
     "_tmxFile": {
@@ -5010,7 +6290,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 111
+        "__id__": 141
       }
     ],
     "_prefab": null,
@@ -5066,17 +6346,17 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 110
+      "__id__": 140
     },
     "_enabled": true,
     "tiledMapNode": {
-      "__id__": 100
+      "__id__": 130
     },
     "backgroundNode": {
       "__id__": 8
     },
     "colliderRoot": {
-      "__id__": 99
+      "__id__": 129
     },
     "objectGroupName": "Collisions",
     "oneWayObjectGroupName": "OneWayPlatforms",
