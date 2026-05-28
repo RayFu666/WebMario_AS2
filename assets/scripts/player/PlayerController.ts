@@ -65,6 +65,7 @@ export default class PlayerController extends cc.Component {
     private walkTimer: number = 0;
     private walkFrameIndex: number = 0;
     private jumpStartY: number = 0;
+    private jumpKeyHeld: boolean = false;
 
     private deathVelocityY: number = 360;
     private deathGravity: number = -900;
@@ -105,7 +106,6 @@ export default class PlayerController extends cc.Component {
         if (!this.rigidBody) {
             return;
         }
-
         const velocity = this.rigidBody.linearVelocity;
         const onGround = this.isOnGround();
 
@@ -186,6 +186,24 @@ export default class PlayerController extends cc.Component {
             this.rigidBody.linearVelocity = cc.v2(0, 0);
             this.rigidBody.angularVelocity = 0;
             this.rigidBody.type = cc.RigidBodyType.Static;
+        }
+    }
+
+    public showIdleFrame(): void {
+        if (!this.sprite) {
+            return;
+        }
+
+        if (this.isBig) {
+            if (this.bigIdleFrame) {
+                this.sprite.spriteFrame = this.bigIdleFrame;
+            }
+
+            return;
+        }
+
+        if (this.smallIdleFrame) {
+            this.sprite.spriteFrame = this.smallIdleFrame;
         }
     }
 
@@ -319,7 +337,11 @@ export default class PlayerController extends cc.Component {
         }
 
         if (event.keyCode === cc.macro.KEY.space) {
-            this.jump();
+            if (!this.jumpKeyHeld) {
+                this.jump();
+            }
+
+            this.jumpKeyHeld = true;
         }
     }
 
@@ -336,6 +358,10 @@ export default class PlayerController extends cc.Component {
         ) {
             this.moveDir = 0;
         }
+
+        if (event.keyCode === cc.macro.KEY.space) {
+            this.jumpKeyHeld = false;
+        }
     }
 
     private jump(): void {
@@ -350,6 +376,7 @@ export default class PlayerController extends cc.Component {
         const velocity = this.rigidBody.linearVelocity;
         velocity.y = this.jumpSpeed;
         this.rigidBody.linearVelocity = velocity;
+
         this.jumpStartY = this.node.y;
 
         if (this.audioManagerNode) {
@@ -359,6 +386,7 @@ export default class PlayerController extends cc.Component {
             }
         }
     }
+    
 
     private isOnGround(): boolean {
         if (!this.rigidBody) {

@@ -19,6 +19,27 @@ export default class GameManager extends cc.Component {
     @property(cc.Label)
     coinLabel: cc.Label = null;
 
+    @property(cc.Label)
+    clearTitleLabel1: cc.Label = null;
+
+    @property(cc.Label)
+    clearTitleLabel2: cc.Label = null;
+
+    @property(cc.Label)
+    clearTimerLabel: cc.Label = null;
+
+    @property(cc.Label)
+    clearXLabel: cc.Label = null;
+
+    @property(cc.Label)
+    clear50Label: cc.Label = null;
+
+    @property(cc.Label)
+    clearEqualLabel: cc.Label = null;
+
+    @property(cc.Label)
+    clearBonusLabel: cc.Label = null;
+
     @property(cc.Node)
     audioManagerNode: cc.Node = null;
 
@@ -29,7 +50,13 @@ export default class GameManager extends cc.Component {
     startTime: number = 120;
 
     @property
-    deathTransitionDelay: number = 1.8;
+    deathTransitionDelay: number = 2.3;
+
+    @property
+    levelClearSoundDelay: number = 1;
+
+    @property
+    clearReturnDelay: number = 2.5;
 
     private timeLeft: number = 120;
     private timerAcc: number = 0;
@@ -42,6 +69,7 @@ export default class GameManager extends cc.Component {
         this.timerAcc = 0;
         this.isChangingScene = false;
 
+        this.hideClearUI();
         this.updateAllUI();
     }
 
@@ -273,6 +301,112 @@ export default class GameManager extends cc.Component {
             if (audioManager && audioManager.playKick) {
                 audioManager.playKick();
             }
+        }
+    }
+
+    private playLevelClearSound(): void {
+        if (this.audioManagerNode) {
+            const audioManager = this.audioManagerNode.getComponent('AudioManager') as any;
+
+            if (audioManager && audioManager.playLevelClear) {
+                audioManager.playLevelClear();
+            }
+        }
+    }
+
+    public levelClear(): void {
+        if (this.isChangingScene) {
+            return;
+        }
+
+        this.ensureGameSession();
+
+        this.isChangingScene = true;
+        this.stopBGM();
+
+        const remainingTime = this.timeLeft;
+        const bonusScore = remainingTime * 50;
+
+        if (GameSession.instance) {
+            GameSession.instance.addScore(bonusScore);
+        }
+
+        this.updateScoreUI();
+        this.showClearUI(remainingTime, bonusScore);
+
+        this.scheduleOnce(() => {
+            this.playLevelClearSound();
+        }, this.levelClearSoundDelay);
+
+        this.scheduleOnce(() => {
+            cc.director.loadScene('LevelSelect');
+        }, this.levelClearSoundDelay + this.clearReturnDelay);
+    }
+
+    private hideClearUI(): void {
+        if (this.clearTitleLabel1) {
+            this.clearTitleLabel1.node.active = false;
+        }
+
+        if (this.clearTitleLabel2) {
+            this.clearTitleLabel2.node.active = false;
+        }
+
+        if (this.clearTimerLabel) {
+            this.clearTimerLabel.node.active = false;
+        }
+
+        if (this.clearXLabel) {
+            this.clearXLabel.node.active = false;
+        }
+
+        if (this.clear50Label) {
+            this.clear50Label.node.active = false;
+        }
+
+        if (this.clearEqualLabel) {
+            this.clearEqualLabel.node.active = false;
+        }
+
+        if (this.clearBonusLabel) {
+            this.clearBonusLabel.node.active = false;
+        }
+    }
+
+    private showClearUI(remainingTime: number, bonusScore: number): void {
+        if (this.clearTitleLabel1) {
+            this.clearTitleLabel1.string = 'LEVEL';
+            this.clearTitleLabel1.node.active = true;
+        }
+
+        if (this.clearTitleLabel2) {
+            this.clearTitleLabel2.string = 'CLEARRED!';
+            this.clearTitleLabel2.node.active = true;
+        }
+
+        if (this.clearTimerLabel) {
+            this.clearTimerLabel.string = '' + remainingTime;
+            this.clearTimerLabel.node.active = true;
+        }
+
+        if (this.clearXLabel) {
+            this.clearXLabel.string = 'X';
+            this.clearXLabel.node.active = true;
+        }
+
+        if (this.clear50Label) {
+            this.clear50Label.string = '50';
+            this.clear50Label.node.active = true;
+        }
+
+        if (this.clearEqualLabel) {
+            this.clearEqualLabel.string = '=';
+            this.clearEqualLabel.node.active = true;
+        }
+
+        if (this.clearBonusLabel) {
+            this.clearBonusLabel.string = '' + bonusScore;
+            this.clearBonusLabel.node.active = true;
         }
     }
 
