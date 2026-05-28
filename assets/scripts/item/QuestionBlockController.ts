@@ -4,6 +4,7 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class QuestionBlockController extends cc.Component {
+    private static lastBlockHitTime: number = -999;
     @property(cc.Node)
     playerNode: cc.Node = null;
 
@@ -36,6 +37,9 @@ export default class QuestionBlockController extends cc.Component {
 
     @property
     hitTolerance: number = 40;
+
+    @property
+    sharedHitCooldown: number = 0.12;
 
     @property
     mushroomSize: number = 48;
@@ -134,6 +138,13 @@ export default class QuestionBlockController extends cc.Component {
     }
 
     private activateBlock(playerRigidBody: cc.RigidBody): void {
+        const now = Date.now() / 1000;
+
+        if (now - QuestionBlockController.lastBlockHitTime < this.sharedHitCooldown) {
+            return;
+        }
+
+        QuestionBlockController.lastBlockHitTime = now;
         this.hasUsed = true;
 
         playerRigidBody.linearVelocity = cc.v2(playerRigidBody.linearVelocity.x, 0);
