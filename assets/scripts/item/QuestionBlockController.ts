@@ -19,8 +19,11 @@ export default class QuestionBlockController extends cc.Component {
     @property(cc.SpriteFrame)
     mushroomFrame: cc.SpriteFrame = null;
 
-    @property(cc.SpriteFrame)
-    coinFrame: cc.SpriteFrame = null;
+    @property([cc.SpriteFrame])
+    coinFrames: cc.SpriteFrame[] = [];
+
+    @property(cc.BitmapFont)
+    scoreFont: cc.BitmapFont = null;
 
     @property
     blockType: number = 0;
@@ -30,6 +33,24 @@ export default class QuestionBlockController extends cc.Component {
 
     @property
     animationInterval: number = 0.3;
+
+    @property
+    hitTolerance: number = 40;
+
+    @property
+    mushroomSize: number = 48;
+
+    @property
+    mushroomGroundY: number = -243;
+
+    @property
+    coinSize: number = 60;
+
+    @property
+    coinJumpHeight: number = 70;
+
+    @property
+    coinAnimInterval: number = 0.06;
 
     private sprite: cc.Sprite = null;
     private hasUsed: boolean = false;
@@ -45,10 +66,12 @@ export default class QuestionBlockController extends cc.Component {
     }
 
     update(dt: number): void {
-        if (!this.hasUsed) {
-            this.updateQuestionAnimation(dt);
-            this.checkPlayerHitFromBelow();
+        if (this.hasUsed) {
+            return;
         }
+
+        this.updateQuestionAnimation(dt);
+        this.checkPlayerHitFromBelow();
     }
 
     private updateQuestionAnimation(dt: number): void {
@@ -77,20 +100,35 @@ export default class QuestionBlockController extends cc.Component {
             return;
         }
 
-        if (!this.isOverlapping(this.playerNode, this.node)) {
-            return;
-        }
-
         const playerRigidBody = this.playerNode.getComponent(cc.RigidBody);
         if (!playerRigidBody) {
             return;
         }
 
         const playerVelocityY = playerRigidBody.linearVelocity.y;
-        const playerTop = this.playerNode.y + this.playerNode.height / 2;
-        const blockBottom = this.node.y - this.node.height / 2;
+        if (playerVelocityY <= 0) {
+            return;
+        }
 
-        if (playerVelocityY > 0 && playerTop <= blockBottom + 26) {
+        const playerBox = this.playerNode.getBoundingBoxToWorld();
+        const blockBox = this.node.getBoundingBoxToWorld();
+
+        const playerTop = playerBox.y + playerBox.height;
+        const blockBottom = blockBox.y;
+
+        const playerCenterX = playerBox.x + playerBox.width / 2;
+        const blockLeft = blockBox.x;
+        const blockRight = blockBox.x + blockBox.width;
+
+        const horizontalInside =
+            playerCenterX >= blockLeft &&
+            playerCenterX <= blockRight;
+
+        const verticalHit =
+            playerTop >= blockBottom - this.hitTolerance &&
+            playerTop <= blockBottom + 6;
+
+        if (horizontalInside && verticalHit) {
             this.activateBlock(playerRigidBody);
         }
     }
@@ -104,26 +142,15 @@ export default class QuestionBlockController extends cc.Component {
             this.sprite.spriteFrame = this.usedFrame;
         }
 
-        if (this.gameManagerNode) {
-            const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
-            if (gameManager && gameManager.playPowerUpAppearSound) {
-                gameManager.playPowerUpAppearSound();
-            }
-        }
+        this.playAppearSound();
 
         if (this.blockType === 1) {
             this.spawnCoin();
+            this.addCoinAndScore();
             return;
         }
 
         this.spawnMushroom();
-
-        if (this.gameManagerNode) {
-            const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
-            if (gameManager) {
-                gameManager.addScore(100);
-            }
-        }
     }
 
     private spawnMushroom(): void {
@@ -131,77 +158,156 @@ export default class QuestionBlockController extends cc.Component {
             return;
         }
 
-        const mushroomSize = 32;
         const blockTopY = this.node.y + this.node.height / 2;
         const blockRightX = this.node.x + this.node.width / 2;
 
         const mushroom = new cc.Node('Mushroom');
         mushroom.parent = this.node.parent;
 
-        mushroom.setContentSize(mushroomSize, mushroomSize);
-        mushroom.setPosition(this.node.x, blockTopY - mushroomSize / 2);
+        mushroom.setContentSize(this.mushroomSize, this.mushroomSize);
+        mushroom.setPosition(this.node.x, blockTopY - this.mushroomSize / 2);
+        mushroom.zIndex = this.node.zIndex - 1;
 
         const sprite = mushroom.addComponent(cc.Sprite);
         sprite.spriteFrame = this.mushroomFrame;
         sprite.sizeMode = cc.Sprite.SizeMode.CUSTOM;
-        mushroom.setContentSize(mushroomSize, mushroomSize);
-
-        mushroom.zIndex = this.node.zIndex - 1;
 
         const controller = mushroom.addComponent(MushroomController);
         controller.playerNode = this.playerNode;
         controller.gameManagerNode = this.gameManagerNode;
-        controller.mushroomSize = mushroomSize;
+        controller.mushroomSize = this.mushroomSize;
         controller.blockTopY = blockTopY;
         controller.blockRightX = blockRightX;
         controller.blockZIndex = this.node.zIndex;
-        controller.groundY = -243;
-
-        cc.log('spawn mushroom size = ' + mushroom.width + ', ' + mushroom.height);
+        controller.groundY = this.mushroomGroundY;
     }
 
     private spawnCoin(): void {
-        if (!this.coinFrame) {
+        if (!this.coinFrames || this.coinFrames.length === 0) {
             return;
         }
 
-        const coinSize = 40;
         const blockTopY = this.node.y + this.node.height / 2;
+        const startY = blockTopY - this.coinSize / 2;
+        const visibleY = blockTopY + this.coinSize / 2;
+        const topY = visibleY + this.coinJumpHeight;
 
         const coin = new cc.Node('Coin');
         coin.parent = this.node.parent;
 
-        coin.setContentSize(coinSize, coinSize);
-        coin.setPosition(this.node.x, blockTopY + coinSize / 2);
-        coin.zIndex = this.node.zIndex + 1;
+        coin.setContentSize(this.coinSize, this.coinSize);
+        coin.setPosition(this.node.x, startY);
+        coin.zIndex = this.node.zIndex - 1;
 
         const sprite = coin.addComponent(cc.Sprite);
-        sprite.spriteFrame = this.coinFrame;
+        sprite.spriteFrame = this.coinFrames[0];
         sprite.sizeMode = cc.Sprite.SizeMode.CUSTOM;
-        coin.setContentSize(coinSize, coinSize);
+        coin.setContentSize(this.coinSize, this.coinSize);
 
-        if (this.gameManagerNode) {
-            const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
-
-            if (gameManager) {
-                if (gameManager.addCoin) {
-                    gameManager.addCoin(1);
-                }
-
-                if (gameManager.addScore) {
-                    gameManager.addScore(100);
-                }
+        this.scheduleOnce(() => {
+            if (coin && coin.isValid) {
+                coin.zIndex = this.node.zIndex + 1;
             }
-        }
+        }, 0.08);
+
+        this.playCoinFrameAnimation(sprite);
 
         cc.tween(coin)
-            .by(0.2, { y: 70 })
-            .delay(0.15)
-            .to(0.15, { opacity: 0 })
+            .to(0.18, { y: topY })
+            .to(0.22, { y: visibleY })
             .call(() => {
+                const textX = coin.x;
+                const textY = coin.y;
                 coin.destroy();
+                this.spawnScoreText(textX, textY);
             })
             .start();
+    }
+
+    private playCoinFrameAnimation(sprite: cc.Sprite): void {
+        if (!sprite || !this.coinFrames || this.coinFrames.length < 3) {
+            return;
+        }
+
+        cc.tween(sprite)
+            .call(() => { sprite.spriteFrame = this.coinFrames[0]; })
+            .delay(this.coinAnimInterval)
+            .call(() => { sprite.spriteFrame = this.coinFrames[1]; })
+            .delay(this.coinAnimInterval)
+            .call(() => { sprite.spriteFrame = this.coinFrames[2]; })
+            .delay(this.coinAnimInterval)
+            .call(() => { sprite.spriteFrame = this.coinFrames[1]; })
+            .delay(this.coinAnimInterval)
+            .call(() => { sprite.spriteFrame = this.coinFrames[0]; })
+            .start();
+    }
+
+    private spawnScoreText(x: number, y: number): void {
+        const scoreNode = new cc.Node('Score100');
+        scoreNode.parent = this.node.parent;
+        scoreNode.setPosition(x, y);
+        scoreNode.zIndex = this.node.zIndex + 2;
+
+        const label = scoreNode.addComponent(cc.Label);
+        label.string = '100';
+        label.fontSize = 48;
+        label.lineHeight = 48;
+
+        if (this.scoreFont) {
+            label.font = this.scoreFont;
+        }
+
+        cc.tween(scoreNode)
+            .by(0.35, { y: this.coinJumpHeight })
+            .to(0.15, { opacity: 0 })
+            .call(() => {
+                scoreNode.destroy();
+            })
+            .start();
+    }
+
+    private playAppearSound(): void {
+        if (!this.gameManagerNode) {
+            return;
+        }
+
+        const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
+
+        if (gameManager && gameManager.playPowerUpAppearSound) {
+            gameManager.playPowerUpAppearSound();
+        }
+    }
+
+    private addScore(value: number): void {
+        if (!this.gameManagerNode) {
+            return;
+        }
+
+        const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
+
+        if (gameManager && gameManager.addScore) {
+            gameManager.addScore(value);
+        }
+    }
+
+    private addCoinAndScore(): void {
+        if (!this.gameManagerNode) {
+            return;
+        }
+
+        const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
+
+        if (!gameManager) {
+            return;
+        }
+
+        if (gameManager.addCoin) {
+            gameManager.addCoin(1);
+        }
+
+        if (gameManager.addScore) {
+            gameManager.addScore(100);
+        }
     }
 
     private isOverlapping(a: cc.Node, b: cc.Node): boolean {
