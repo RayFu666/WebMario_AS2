@@ -19,6 +19,12 @@ export default class QuestionBlockController extends cc.Component {
     @property(cc.SpriteFrame)
     mushroomFrame: cc.SpriteFrame = null;
 
+    @property(cc.SpriteFrame)
+    coinFrame: cc.SpriteFrame = null;
+
+    @property
+    blockType: number = 0;
+
     @property
     spawnOffsetY: number = 40;
 
@@ -104,6 +110,12 @@ export default class QuestionBlockController extends cc.Component {
                 gameManager.playPowerUpAppearSound();
             }
         }
+
+        if (this.blockType === 1) {
+            this.spawnCoin();
+            return;
+        }
+
         this.spawnMushroom();
 
         if (this.gameManagerNode) {
@@ -146,6 +158,50 @@ export default class QuestionBlockController extends cc.Component {
         controller.groundY = -243;
 
         cc.log('spawn mushroom size = ' + mushroom.width + ', ' + mushroom.height);
+    }
+
+    private spawnCoin(): void {
+        if (!this.coinFrame) {
+            return;
+        }
+
+        const coinSize = 40;
+        const blockTopY = this.node.y + this.node.height / 2;
+
+        const coin = new cc.Node('Coin');
+        coin.parent = this.node.parent;
+
+        coin.setContentSize(coinSize, coinSize);
+        coin.setPosition(this.node.x, blockTopY + coinSize / 2);
+        coin.zIndex = this.node.zIndex + 1;
+
+        const sprite = coin.addComponent(cc.Sprite);
+        sprite.spriteFrame = this.coinFrame;
+        sprite.sizeMode = cc.Sprite.SizeMode.CUSTOM;
+        coin.setContentSize(coinSize, coinSize);
+
+        if (this.gameManagerNode) {
+            const gameManager = this.gameManagerNode.getComponent('GameManager') as any;
+
+            if (gameManager) {
+                if (gameManager.addCoin) {
+                    gameManager.addCoin(1);
+                }
+
+                if (gameManager.addScore) {
+                    gameManager.addScore(100);
+                }
+            }
+        }
+
+        cc.tween(coin)
+            .by(0.2, { y: 70 })
+            .delay(0.15)
+            .to(0.15, { opacity: 0 })
+            .call(() => {
+                coin.destroy();
+            })
+            .start();
     }
 
     private isOverlapping(a: cc.Node, b: cc.Node): boolean {
